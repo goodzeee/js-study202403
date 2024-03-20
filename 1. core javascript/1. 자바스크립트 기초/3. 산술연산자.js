@@ -23,11 +23,11 @@ console.log(`x: ${x}`);
 // 전위 연산, 후위 연산
 var n1 = 10;
 var n2 = n1++;
-console.log(`n1: ${n1}, n2: ${n2}`);
+console.log(`n1: ${n1}, n2: ${n2}`); // 11 10
 
 var n3 = 10;
 var n4 = ++n3;
-console.log(`n3: ${n3}, n4: ${n4}`);
+console.log(`n3: ${n3}, n4: ${n4}`); // 11 11
 
 var xx = 5;
 xx++; // 1 증감
