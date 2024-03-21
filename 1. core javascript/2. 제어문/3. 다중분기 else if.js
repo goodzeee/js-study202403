@@ -10,3 +10,4 @@ if (age >= 20) {
 } else {
   console.log('어린이 입니다.');
 }
+

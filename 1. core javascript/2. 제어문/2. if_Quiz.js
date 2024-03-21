@@ -32,9 +32,9 @@ var n1 = +prompt('정수 A');
 var n2 = +prompt('정수 B');
 var n3 = +prompt('정수 C');
 
-if (n1 === n2 === n3) {
+if (n1 === n2 && n2 === n3) {
   alert('3개 값이 모두 같습니다.');
-} else if (n1 === n2 || n2 === n3 || n1 === n3) {
+} else if (n1 === n2 || n2 === n3 || n3 === n1) {
   alert('2개 값이 같습니다.');
 } else {
   alert('모든 값이 다릅니다.');
@@ -44,10 +44,18 @@ if (n1 === n2 === n3) {
 var n1 = +prompt('정수 A');
 var n2 = +prompt('정수 B');
 
-alert(`두 값의 차이는 ${n1 - n2}입니다.`);
+var diff = (n1 > n2) ? n1 - n2 : n2 - n1;
+
+alert(`두 값의 차이는 ${diff}입니다.`);
 
 // Q4) 정수 3개 입력 후 최소값 구하기.
 var n1 = +prompt('정수 A');
 var n2 = +prompt('정수 B');
 var n3 = +prompt('정수 C');
+
+var min = n1;
+if (n2 < min) min = n2;
+if (n3 < min) min = n3;
+
+alert(`최소값은 ${min} 입니다.`);
 
