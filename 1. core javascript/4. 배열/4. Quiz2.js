@@ -9,13 +9,14 @@
 2. '그만'이라고 입력하면 질문을 멈추고
    입력했던 숫자배열과 숫자의 총합(배열 요소의 합)을 계산하여 출력하세요.
 */
-//var inputNum = +prompt(`숫자를 입력하세요. \n그만두려면 '그만'이라고 입력하세요.`);
-var listNum = [];
 
-while (true) {
+ var listNum = [];
+
+while (true) {   // numbers.length < 6 -> 입력받은 숫자의 길이가 6이되면 그만하게 하기
   var inputNum = prompt(`숫자를 입력하세요. \n그만두려면 '그만'이라고 입력하세요.`);
   
-  if (inputNum === '그만') break;
+  if (inputNum === '그만')
+    break;
     
     listNum.push(+inputNum); 
 }
@@ -26,9 +27,6 @@ for (var i = 0; i < listNum.length; i++) {
 }
 
 alert(`입력한 숫자 목록 ${listNum}\n입력한 숫자 총합 : ${totalNum}`);
-
-
-
 
 
 // 숫자놓을 배열 1.
@@ -45,3 +43,4 @@ alert(`입력한 숫자 목록 ${listNum}\n입력한 숫자 총합 : ${totalNum}
 // alert 출력문 !
 
 // * 타입 맞춰주는거 주의 ! 흘러가는 흐름에 알맞는 위치에 넣어주는거 연습하기 !!
+
