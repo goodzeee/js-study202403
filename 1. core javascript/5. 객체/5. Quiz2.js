@@ -58,4 +58,37 @@ for (var idx = 0; idx < userInfo.userList.length; idx++) {
 }
 }
 
+
 // 위 객체에서 배열만 추출
+var userList = userInfo.userList;
+
+while (true) {
+  // 계정을 입력받고 해당 계정이 존재하는 계정인지를 확인
+  var inputId = prompt(`아이디를 입력하세요.`);  // 사용자가 입력한 계정명
+  
+  // 회원목록 배열을 반복순회하여 입력한 계정명과 일치하는 계정이 있는지 체크
+  var foundUser = null;
+  for (var user of userList) { // 전체 배열에서 user라는 변수 써서 반복 돌게 하기 !!
+    if (inputId === user.account) {  // 입력값이랑 반복한 배열 중 account키의 값이 일치한지 확인
+      foundUser = user;  // 일치하다면 빈공간에 user 배열 넣어주기
+      break;             // 입력한 값이 일치하는지 판별하기 위한 for 반복문 !!
+    }
+  }
+
+
+  if (foundUser !== null) {
+    //console.log(`회원가입되어 있습니다.`);
+     // 비번 검증
+    // 사용자에게 비번 입력받기
+    var inputPw = prompt(`비밀번호를 입력하세요.`);
+
+  if (inputPw === foundUser.password) {  // foundUser가 userList 배열을 담고 있음.
+    alert(`${foundUser.username}님 로그인 성공 !`);
+    break;
+  } else {
+    alert(`비밀번호가 틀렸습니다.`);
+  }
+} else {
+  alert(`회원가입부터 하세요.`);
+}
+}

@@ -39,6 +39,7 @@ var articles = {
 
 console.log(articles.articleList[0]); // articleList가 배열이라 .length , [1] 인덱스 문법 사용 가능 !!
 console.log(articles.articleList[2].content); // 원하는 배열 인덱스.키 이름 -> 해당 값만 출력 !!
+console.log(articles.articleList[1].regDate);
 
 console.log('=====================================');
 
@@ -47,3 +48,5 @@ console.log('=====================================');
 for (var idx of articles.articleList) {
   console.log(idx.writer);
 }
+
+// 전부 추출해서 반복하는 형식 -> 배열 of , 객체 in 사용 !!

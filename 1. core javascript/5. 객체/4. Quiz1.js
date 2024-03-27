@@ -34,9 +34,9 @@ var salaries = {
   lee: 1300000
 }
 
-var total = 0;
+var total = 0; // 누적합 넣을 새로운 변수 생성
 
-for (var data in salaries) {
-  total += salaries[data];
+for (var data in salaries) {  // 객체 안에 변수 설정해서 객체 안 모든 키 반복하게 !!
+  total += salaries[data]; // 반복 돌면서 +=으로 토탇에 누적 중
 }
 console.log(total);
