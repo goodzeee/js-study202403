@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+
+    function stopLoop () {
+      while (true) {
+        var prom = prompt('명렁어를 입력하시오.')
+        if (prom === '멈춰 !') {
+          break; // while 반복문만 종료 시킴
+        }
+        if(prom === 'stop') {
+          return; // 함수까지 전체 다 종료 시킴 (더 강력해)
+        }
+        alert(prom);
+      } //end while
+      alert('수고수고');
+    } //end function
+
+    stopLoop();
+
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
