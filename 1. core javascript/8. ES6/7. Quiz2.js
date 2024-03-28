@@ -84,7 +84,6 @@ console.log('=============================');
 // 서울에 사는 급여가 400만원보다 높은 사람의 이름과 주소만 추출해줘
 const filtered = filter(userList, user => user.address ==='서울' && user.salary > 4000000);
 //console.log(filtered);
-
 const mapped = map(filtered, user => {
   return {
     name: user.userName,
@@ -93,15 +92,6 @@ const mapped = map(filtered, user => {
 });
 console.log(mapped);
 
-
-function find (condition2) {
-  for (let i = 0; i < userList.length; i++) {
-    if (userList[i] === userList[0]) {
-      userList[i];
-    }
-  }
-  return condition2;
-}
 
 // 서울에 사는 첫 번째 사용자를 찾는 예시
 const firstUserInSeoul = find((user) => user.address === '서울');
