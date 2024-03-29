@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <ul id="fruits">
+    <li class="f-item">사과</li>
+    <li class="f-item">딸기</li>
+    <li class="f-item">수박</li>
+    <li class="f-item">망고</li>
+  </ul>
+
+  <script>
+    //console.log(document);    
+    //console.log(document.documentElement); // html태그 지칭
+    const html = document.documentElement;
+    html.classList.add('my-html');
+
+    console.log(html.children[1]); // html 자식 중 body를 고르는 것
+    const body = document.body; //= 같은 역할 ! .children[1];
+    body.style.backgroud = 'gray';
+
+    //document -> html -> head, body 속성 타고 타고 내려옴
+  </script>
+</body>
+</html> 
