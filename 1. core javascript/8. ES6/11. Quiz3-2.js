@@ -134,12 +134,13 @@ if (sortedTraders.length % 2 === 1) {
 console.log(middleTrade);
 //9. **각 도시에서 진행된 거래의 수를 계산해주세요. 결과는 `{도시이름: 거래수}` 형태의 객체여야 합니다.**
 console.log('==============================');
-
-const trsCountByCity = traders.reduce((acc, trs) => {
-  if (!acc[trs.trader.city]) {
-    acc[trs.trader.city] = 1;
+// trader 객체만 사용하게 !
+const trsCountByCity = traders.reduce((acc, {trader}) => {
+  const {city} = trader;
+  if (!acc[city]) {
+    acc[city] = 1;
   } else {
-    acc[trs.trader.city]++;
+    acc[city]++;
   }
   return acc;
 }, {});
