@@ -132,3 +132,7 @@ const countByColor = appleBasket.reduce((count, apple) => {
   return count;
 }, {})
 console.log(countByColor);
+
+const nums = [33, 44, 55, 66, 77];
+const maxValue = nums.reduce((max, n) => max < n ? n : max);
+console.log(`최대값 : ${maxValue}`);
