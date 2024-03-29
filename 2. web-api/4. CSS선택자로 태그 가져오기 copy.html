@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<htm lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <ul id="fruits">
+    <li class="f-item ap">사과</li>
+    <li class="f-item sb">딸기</li>
+    <li class="f-item wm">수박</li>
+    <li id = "mango" class="f-item mg">망고</li>
+  </ul>
+
+  <script>
+    // const $mango = document.querySelector('.mg'); // 클래스 선택자 문법 . 쓰기
+    // console.log($mango);
+    // $mango.textContent = '달달한 망고';
+    //const $mango = document.querySelector('.wm+li');
+    //const $mango = document.querySelector('#fruits li:nth-child(4)'); // 클래스 선택자 문법 . 쓰기
+    const $mango = document.querySelector('#mango'); // querySelector -> 발견된 첫번째 노드만 반환
+    
+    console.log($mango);
+    $mango.textContent = '달달한 망고';
+
+    // 유사 배열에서 배열로 만들어서 사용하기 ! [...해당 코드]
+    const $fItemList = [...document.querySelectorAll('.f-item')]; //해당 클래스명 다 골라와
+    console.log($fItemList);
+    console.log([1, 2, 3]);
+    
+    // for 반복문 2개로  스타일 바꾸기 ! =>
+    for (const $f of $fItemList) {
+      $f.style.color = 'red'; // 반복해서 li 글자색 다 바꿔놓게 됨.
+    }
+
+    $fItemList.forEach($f => {
+      $f.style.color = 'blue';
+    });
+
+    // 유사 배열 : 객체 형태를 유지한 배열 (따라서 push pop 배열에서 사용하는 문법 못 써 !)
+    const foods = {
+      0 : '초밥',
+      1 : '마라탕',
+      2 : '햄버거',
+      length : 3
+    };
+    console.log(foods[0]);
+    console.log(foods.length);
+
+    // js는 뭐하면 바뀌게 하는 상호작용용으로 사용하기 위한 것
+  </script>
+</body>
+</htm
