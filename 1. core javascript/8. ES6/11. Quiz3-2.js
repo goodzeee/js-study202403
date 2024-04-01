@@ -118,7 +118,8 @@ console.log(totalValueCity);
 //7. **2022년과 2023년 각각에서 가장 많은 거래를 한 거래자의 이름과 그 거래 횟수를 출력해주세요.**
 
 //8. **모든 거래 중 거래액이 중간값인 거래의 정보(거래자 이름, 도시, 연도, 거래액)를 출력해주세요.**
-const sortedTraders = traders.slice().sort((a, b) => a.value - b.value);
+// 원본 유지시키고 복사본 만들기 slice() !!
+const sortedTraders = traders.slice().sort((a, b) => a.value - b.value); // 거래액을 오름차순으로 정렬 1.
 
 const middleIndex = Math.floor(sortedTraders.length / 2);
 
@@ -128,7 +129,7 @@ if (sortedTraders.length % 2 === 1) {
   middleTrade = sortedTraders[middleIndex];
 } else {
   middleTrade = [ sortedTraders[middleIndex],
-  sortedTraders[middleIndex- 1 ]
+  sortedTraders[middleIndex - 1 ]
   ];
 }
 console.log(middleTrade);
