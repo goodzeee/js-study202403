@@ -35,6 +35,7 @@ console.log(increase());
 console.log(decrease());
 console.log(decrease());
 
+// ---------> 위 함수문 클로저 활용해서 표현하기 !!
 const { increase2, decrease2 } = (() => {
   let count = 0;
   return {
