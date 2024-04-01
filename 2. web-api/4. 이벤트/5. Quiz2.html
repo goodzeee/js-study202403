@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .menu ul {
+        margin: 0;
+        list-style: none;
+        padding-left: 20px;
+        display: none;
+    }
+    .menu .title {
+        font-size: 18px;
+        cursor: pointer;
+
+        -ms-user-select: none;
+        -moz-user-select: -moz-none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    .menu .title::before {
+        content: '▶ ';
+        font-size: 80%;
+        color: green;
+    }
+    .menu.open .title::before {
+        content: '▼ ';
+    }
+    .menu.open ul {
+        display: block;
+    }
+</style>
+</head>
+<body>
+  <!-- #lunches.menu>span.title+ul>li*4 -->
+  <div id="lunches" class="menu open">
+    <span class="title">추천 메뉴(Click Me!)</span>
+    <ul>
+        <li>돈까스</li>
+        <li>군만두</li>
+        <li>볶음밥</li>
+        <li>마파두부</li>
+    </ul>
+</div>
+
+<script>
+// 기본 상태에서 안보이다 추천 메뉴 클릭시 보여지게 함 !
+const $lunches = document.getElementById('lunches'); 
+const $lunchMenuClick = document.querySelector('.title');
+
+$lunchMenuClick.addEventListener('click', () => {
+    $lunches.classList.toggle('open');
+});
+
+</script>
+</body>
+</html>
