@@ -24,6 +24,10 @@
     //$fruits.insertBefore($newLi, $watermelon); // 수박 이전에 넣어줘 ~
     //$fruits.insertBefore($newLi, $fruits.firstElementChild); // 첫째 자식 이전에 넣어줘 ~
     $fruits.insertBefore($newLi, document.querySelector('li:nth-child(2)')); // 자식 2번째 이전에 넣어줘 ~
+
+    // 노드 이동 (맨 뒤에 추가 & 중간 삽입)
+    $fruits.appendChild($apple); // 해당 태그 맨 뒤로 이동 !
+    $fruits.insertBefore($banana, $newLi); // 바나나 태그 새로운 태그 앞으로 이동 !
     </script>
   
 </body>
