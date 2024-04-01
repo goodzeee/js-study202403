@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <ul class="users">
+    <li data-user-number="1234" data-role="common">뽀로로</li>
+    <li data-user-number="9999" data-role="admin">크롱</li>
+  </ul>
+
+  <script>
+    const [$user1, $user2] = [...document.querySelectorAll('.users li')];
+    // 데이터 속성 확인 : dataset.data-뒤에 오는 데이터 속성명 
+    const pororoNumber = $user1.dataset.userNumber; // userNumber 데이터 속성
+    console.log(pororoNumber);
+
+    const clong = $user2.dataset.role; // role 데이터 속성
+    console.log(clong);
+    // 데이터 속성 수정
+    $user2.dataset.role = 'vip';
+    // 데이터 속성 추가
+    $user1.dataset.userPhoneNumber = '01012345678';
+    // 삭제
+    delete $user1.dataset.userPhoneNumber;
+  </script>
+
+</body>
+</html>

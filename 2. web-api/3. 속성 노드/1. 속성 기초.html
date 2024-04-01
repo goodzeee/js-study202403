@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="email" id="account" value="abc@naver.com">
+
+  <script>
+    const $input = document.querySelector('input');
+    console.log($input.attributes);
+    console.log($input.attributes.type); // "email"
+    //$input.attributes.type.value = 'checkbox' // 속성 조작 : value - 타입 유형 바꾸기 !
+    $input.attributes.id.value = 'zzz'; // 속성이름.값 = id.value
+    $input.attributes.value.value = 'zzz@naver.com'
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .highlight {
+      color: aqua;
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="greet">
+    Hello <span class="highlight">World</span>
+  </div>
+
+  <ul id="food-list">
+    <li class="food">짬뽕</li>
+    <li class="food">초밥</li>
+    <li class="food">파스타</li>
+  </ul>
+
+  <script>
+    // textContent, innerHTML : 텍스트 조작할 때 부모에서 하지 말기 ! 같이 딸려서 수정됨.
+    
+    const $greet = document.getElementById('greet');
+    console.log($greet.textContent); // 텍스트 가져올 때 사용 ! (줄바꿈, 공백 다 가져와야 함.)
+    //$greet.textContent = '안녕 <span class = "highlight">자바스크립트 !</span>'; // *주의* 이러면 자식 태그 안에 텍스트 다 날라감. span 날라감
+    $greet.innerHTML = '안녕 <span class = "highlight">자바스크립트 !</span>'; // innerHTML : 이렇게 지워진 자식 태그 선언해서 사용하기 !
+    $greet.querySelector('.highlight').textContent = 'javascript'; // 이 두 방법으로 지워진 요소 가져오기
+    
+    // innerHTML : 자식 요소 텍스트 컨트롤 !
+    const $foodList = document.getElementById('food-list');
+    //$foodList.innerHTML = '<div>메롱</div>'; // 이러면 li 다 메롱으로 바뀜.
+    // 자식 태그 추가
+    $foodList.innerHTML += '<li class = "food">짜장면</li>';
+    // 자식 태그 전체 삭제
+    $foodList.innerHTML = '';
+
+    const foods = ['연어회', '돈까스', '수박'];
+    foods.forEach (f => {
+      $foodList.innerHTML += `
+      <li class = "food">${f}</li>`;
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <ul id="fruits">
+    <li>사과</li>
+    <li>바나나</li>
+    <li>수박</li>
+  </ul>
+
+  <script>
+    const $fruits = document.getElementById('fruits');
+    const [$apple, $banana, $watermelon] = [...$fruits.children];
+
+    // 새 노드 생성
+    const $newDiv = document.createElement('div');
+    $newDiv.textContent = '빡스';
+
+    // 노드 교체 : replaceChild(new , old);
+    $fruits.replaceChild($newDiv, $banana); // 교체
+    $fruits.removeChild($watermelon); // 삭제
+
+    // 자식노드 전체 삭제
+    //$fruits.innerHTML = '';
+    [...$fruits.children].forEach($f => {
+      $fruits.removeChild($f);
+    }); // forEach 함수로도 전체 삭제 가능.
+    const children = [...$fruits.children];
+    for (let i = 0; i < children.length; i++) {
+      $fruits.removeChild(children[i]);
+    }
+  </script>
+  
+</body>
+</html>
