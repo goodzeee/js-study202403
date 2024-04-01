@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <ul id="fruits">
+    <li class="fr apple">사과</li>
+    <li class="fr banana">바나나</li>
+    <li class="fr grape">포도</li> 
+  </ul>
+
+  <div class="box">
+
+  </div>
+
+  <script>
+    // 엔터쳐서 줄 간격, 공백 주면 length 누적돼서 나옴.
+    const $ul = document.getElementById('fruits'); // 아이디 불러오기 전용 !
+    const $children = [...$ul.children]; // ul 자식들 가져올 때 배열로 가져와서 사용 !
+    console.log($children);
+
+    const $first = $ul.firstElementChild; // 첫째 자식노드 요소 뽑아올 시 !
+    console.log($first);
+    $first.style.fontSize = '2em';
+
+    const $last = $ul.lastElementChild; // 마지막 자식노드 Element
+    console.log($last);
+    $last.style.color = 'violet'
+
+    function hasChildren($tag) {
+      return $tag.children.length > 0; // 자식요소 길이 유무 ! 0 이상
+    }
+
+    const $box = document.querySelector('.box');
+    console.log($box.children);
+    console.log(hasChildren($box));
+
+  </script>
+
+</body>
+</html>
