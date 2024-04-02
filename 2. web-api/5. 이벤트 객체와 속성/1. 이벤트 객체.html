@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <p>아무 곳이나 클릭하세요.</p>
+  <em class = 'msg'></em>
+
+  <hr>
+
+  <input type = 'text' id = 'txt'>
+  <p class = 'show'></p>
+  <script>
+    // 문서 전체의 클릭 이벤트 주기 !
+    document.addEventListener('click', ({x, y, shiftKey}) => {
+
+      //console.log(event);
+      const $em = document.querySelector('.msg');
+
+      // 쉬프트키 누르면서 클릭 이벤트 시 클릭 위치 좌표 출력 !!
+      if (shiftKey) {
+      $em.textContent = `x: ${x}, y: ${y}`; // 찍는 위치 좌표 보여줌 !
+      } else {
+        $em.textContent = '';
+      }
+    });
+
+    // 키업 이벤트로 텍스트 입력시 출력되는 코드 !
+    const $txt = document.getElementById('txt');
+    $txt.addEventListener('keyup', (e) => {
+      //console.log(e);
+      //console.log($txt.value); // input에 들어있는 값 읽을 수 있다.
+      const $show = document.querySelector('.show');
+      // 엔터시 실행되는 코드 !
+      if (e.key === 'Enter') {
+      $show.textContent = $txt.value; // p에 보여지는 텍스트를 값으로 준다.
+      $txt.value = ''; 
+      }
+    });
+
+      // 문서 전체의 스크롤 이벤트 주기 !
+      window.addEventListener('scroll', (e) => {
+        // 스크롤 이벤트는 여기에 담아짐 !
+        console.log(window.scroll);
+      });
+  </script>
+
+</body>
+</html>

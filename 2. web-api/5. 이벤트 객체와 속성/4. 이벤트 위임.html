@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #fruits {
+            display: flex;
+            list-style: none;
+            padding: 20px;
+            border: 2px solid red;
+            flex-wrap: wrap;
+        }
+
+        #fruits li {
+            width: 100px;
+            cursor: pointer;
+            background: orange;
+            margin-right: 10px;
+        }
+
+        .active {
+            color: red;
+            text-decoration: underline;
+        }
+  </style>
+</head>
+<body>
+  
+  <ul id="fruits">
+    <li id="apple" class="active">Apple</li>
+    <li id="banana">Banana</li>
+    <li id="grape">Grape</li>
+  </ul>
+
+<div>선택된 과일: <em class="msg">Apple</em></div>
+
+<label>
+  # 새로운 과일 추가하기:
+  <input type="text" class="text-box">
+  <button id="add">추가</button>
+</label>
+<script>
+  // 부모한테 이벤트 걸어주면 자식한테도 걸리니 또 안걸어도 되는 버블링 특성 !!
+  // li 태그를 클릭하면 class = active를 클릭한 태그로 옮겨주고 메시지도 변경하는 등
+  // 이벤트 처리를 해야 하는데 만약 새로운 li태그가 생성되면 해당 이벤트를 걸어줘야 하는 번거로움이 생김
+  // 버블링의 특성 활용 : 부모 태그인 ul에 이벤트 한 번만 걸면 자식에게 전염되는 특성을 활용하면 이벤트 처리 굿 !
+  const $fruits = document.querySelector('#fruits');
+
+  //태그에서 class = active를 제거하는 함수
+  const removeActive = () => {
+    [...$fruits.children].forEach($li => {
+      if ($li.classList.contains('active')) {
+        $li.classList.remove('active');
+        return;
+      }
+    });
+  };
+
+  $fruits.addEventListener('click', e => {
+
+    // 이벤트 취소 : 조건부로 이벤트를 중단시키는 것 !
+    // e.target.tagName !== 'LI'
+    // matched('이 태그') : 이 태그가 매치가 안되면 중단 ! (e.target : 이벤트가 터진 태그를 가져옴 !)
+    if (!e.target.matched('#fruits li')) {  // 지금 클릭한 태그 이름이(tagName) li가 아니면 !
+      return; // 중단하게따
+    }
+    //console.log('clicked !');
+    //console.log(e.target); // target : 객체안 어떤 요소를 클릭했는지 알고 있는 !
+    removeActive(); // 1. active 클래스 제거
+    // 2. 클릭대상에 active 클래스 부여
+    e.target.classList.add('active');
+
+    // 3. 클릭한 태그의 텍스트를 em.msg에 저장
+    document.querySelector('.msg').textContent = e.target.textContent;
+
+    /*    4. 입력창에 과일 이름을 쓰고 
+            '추가' 버튼을 누르면  <-- 이벤트
+            입력창에 있는 텍스트가 
+            <li id='텍스트'>텍스트</li> 
+            이런 형태로 생성되어 ul의 끝자식으로
+            추가되어야 한다. */
+  });
+  document.querySelector('#add').addEventListener('click', e => {
+    
+    $li.classList.add('text-box');
+    console.log(e);
+  });
+  const $text = document.querySelector('.text-box');
+  $text.addEventListener('keyup', (e) => {
+    const $add = document.querySelector('#add');
+    if (e.key === 'Enter') {
+      $add.click();
+    }
+  });
+
+  // 1. 추가 버튼을 클릭하면
+  // 1-1. 추가 버튼 요소 노드를 가져온다.
+  const $addBtn = document.getElementById('add');
+  // 1-2. 버튼에 클릭 이벤트 부여
+
+  // 2. 입력한 텍스트를 읽어서
+  // 2-1. input 태그를 가져옴.
+
+  // 3. li태그로 만들어서 텍스트를 넣고
+  // 3-1. li태그 만들기 createElement('태그')
+  // 3-2. 텍스트 넣기
+
+  // 4. 아이디를 부여 한 후 setAttribute()
+  
+  // 5. ul에 추가한다. appendChild()
+
+  // 6. input 비우기
+
+  // input에 텍스트를 입력하고 엔터를 누르면 추가 버튼을 클릭하게 함.
+  // 1. input에 키보드 이벤트를 건다.
+</script>
+</body>
+</html>
