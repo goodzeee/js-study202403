@@ -38,7 +38,7 @@ function createNumberIcons() {
 
 // 선택 범위 업데이트 및 아이콘 재생성
 function updateRangeAndRefreshIcons(isUp) {
-  const $begin = document.getElementById('bigin');
+  const $begin = document.getElementById('begin');
   const $end = document.getElementById('end');
 
   // min, max값 업데이트
@@ -69,7 +69,7 @@ function verifyAnswer($target) {
 
   if (secret === answer) { // 정답인 경우
     // 정답 애니메이션 처리
-    handleCorrectAnswer();
+    handleCorrectAnswer($target);
 
   } else { // 정답이 아닌 경우(up or down) 두 가지 경우만 있으니 삼항 연산자로 간단히 !!
     const isUp = secret > answer;
@@ -81,7 +81,7 @@ function verifyAnswer($target) {
   }
 }
 
-iconClickHandler();
+//iconClickHandler();
 
 // 구슬 클릭 이벤트 핸들러
 function iconClickHandler(e) {
@@ -98,7 +98,7 @@ function iconClickHandler(e) {
 // ===================함수 실행 영역================= //
 createNumberIcons();
 // 1~100까지 구슬 담고 있는 부모에게 클릭 이벤트 주기 !
-document.getElementById('numbers').addEventListener('click', (e) => {
+document.getElementById('numbers').addEventListener('click', iconClickHandler);
   
   // if (!e.target.matches('#numbers .icon')) return;
 
@@ -108,4 +108,3 @@ document.getElementById('numbers').addEventListener('click', (e) => {
   // //console.log(gameData);
   // //console.log(e.target.textContent);
   // verifyAnswer(e.target); // 애는 클릭시 정답 타켓 아니까 이렇게 넣어줌 !
-});
