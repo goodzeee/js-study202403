@@ -62,7 +62,7 @@
 
     // 이벤트 취소 : 조건부로 이벤트를 중단시키는 것 !
     // e.target.tagName !== 'LI'
-    // matched('이 태그') : 이 태그가 매치가 안되면 중단 !
+    // matched('이 태그') : 이 태그가 매치가 안되면 중단 ! (e.target : 이벤트가 터진 태그를 가져옴 !)
     if (!e.target.matched('#fruits li')) {  // 지금 클릭한 태그 이름이(tagName) li가 아니면 !
       return; // 중단하게따
     }
@@ -94,7 +94,7 @@
       $add.click();
     }
   });
-  
+
   // 1. 추가 버튼을 클릭하면
   // 1-1. 추가 버튼 요소 노드를 가져온다.
   const $addBtn = document.getElementById('add');
