@@ -2,11 +2,11 @@
 // form 무조건 제출하는 이슈가 있어서 submit 걸어줘야 함.
 
 // 1. 할 일 입력하면 일정 관리 리스트에 추가되는 !
-// 추가 입력될 할 일 <li> 태그 생성하고 그 <li> 를 목록에 추가해주는 ! 
 const $addBtn = document.getElementById('add');
 const $input = document.getElementById('todo-text');
 const $todo_list = document.querySelector('.todo-list');
 
+// 추가 입력될 할 일 <li> 태그 생성하고 그 <li> 를 목록에 추가해주는 함수
 function makeNewToDoList(inputText) {
   const $newLi = document.createElement('li');
   $newLi.classList.add('todo-list-item');
@@ -78,7 +78,9 @@ document.querySelectorAll('.todo-list-item .remove').forEach($removeBtn => {
   $removeBtn.addEventListener('click', removeToDoItem);
 });
 
+// 3. modify 버튼 클릭시 수정할 수 있도록 <li> 뜨는 함수
 
+// 3-1. 할 일 목록의 수정 버튼에 이벤트 리스너 추가
 
 
 
