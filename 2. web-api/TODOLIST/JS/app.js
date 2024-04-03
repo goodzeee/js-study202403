@@ -1,6 +1,10 @@
 
 //==================== 전역 변수 영역 =================//
 
+// 현재 수정모드에 진입하셨나요 ?
+let isEnterEditMode = false;
+
+
 // 서버와 통신할 데이터
 const todos = [
   {
@@ -52,11 +56,30 @@ function renderNewTodoElement({ id, text }) {
 
 }
 
+// 입력값이 유효한지 검증 함수
+function isValidate ($textInput) {
+
+  const text = $textInput.value; // 태그 가져와서 유효하지 않으면 나올 css 만들기
+  // 입력값이 비었거나 10글자 이상이면 유효하지 않음.
+  if (text.trim() === '' || text.length > 10) {
+    $textInput.style.backgroud = 'orangered';
+    $textInput.setAttribute('placeholder', '필수 입력사항입니다. (10자 이내)');
+    $textInput.value = '';
+    return false;  // 입력 안되게 !
+  }
+    $textInput.style.backgroud = '';
+    $textInput.setAttribute('placeholder', '할 일을 입력하세요.');
+    return true;
+}
+
 // 새로운 할 일을 추가하는 함수
 function insertTodoData() {
   // 1. 입력한 텍스트 읽어오기
   const $todoText = document.getElementById('todo-text');
   const inputText = $todoText.value; // 추가 입력한 텍스트 값 ! 
+
+  // 입력에0 제한둬서 목록에 추가할 수 없게 !
+  if (!isValidate ($todoText)) return;
 
   // 새 할 일의 아이디 값을 생성하는 함수
   const makeNewId = () => todos.length === 0 ? 1 : todos[todos.length - 1].id + 1;
@@ -95,6 +118,13 @@ function toggleDone(dataId) {
   const todo = todos.find(todo => todo.id === dataId); // 객체 다 가져오는 것 find
   if (todo) todo.done = !todo.done;
 }
+
+// 수정 모드 진입 처리
+function toggleModifyMode ($modifyBtn) {
+
+
+}
+
 //============== 함수 실행 영역 - 함수 호출, 이벤트 리스너 등록 ===============//
 
 
@@ -122,38 +152,32 @@ document.querySelector('.todo-list').addEventListener('click', e => {
 } else if (e.target.matches('.checkbox input[type=checkbox]')) {
   e.target.closest('.checkbox').classList.add('checked');
   toggleDone(dataId);
+
   // 수정 버튼 클릭시
 } else if (e.target.matches('.modify span')) {
   // 수정 모드 진입
+  const $todoItem = e.target.closest('.todo-list-item');
   // span.lnr-undo를 span.lnr-checkmark-circle로 클래스 교체 replace
-  // span.text를 input.modify-input으로 태그 교체 replaceChild
-  // 교체된 input 태그 내부에는 기존 span 텍스트가 그대로 들어가야 함
-  // 수정 완료 처리
-}
-});
+  // 클래스 교체하기 .replace('old', 'new')
+  // const $todoItem = e.target.closest('.todo-list-item');
+  // span.lnr-undo를 span.lnr-checkmark-circle로 클래스 교체
+  const $modify = $todoItem.querySelector('.modify span');
+  $modify.classList.replace('lnr-undo', 'lnr-checkmark-circle');
 
+  // span.text를 input.modify-input으로 태그 교체
+  const $modifyInput = document.createElement('input');
+  const $textSpan = $todoItem.querySelector('.text');
+  
+  $modifyInput.classList.add('modify-input');
+  //$todoItem.replaceChild($modifyInput, $textSpan);
+  $modifyInput.value = $textSpan.textContent;
+  $todoItem.replaceChild($modifyInput, $textSpan);
+
+    // 수정 완료 처리
+  toggleModifyMode(e.target); //'.modify span 수정 버튼을 가르킴 !
+} 
+});
 
 // 3. modify 버튼 클릭시 수정할 수 있도록 <li> 뜨는 함수
-
-// 수정 버튼 클릭시 수정 화면이 뜨도록 !
-// 수정 버튼 클릭 이벤트 리스너 등록
-document.querySelector('.todo-list').addEventListener('click', e => {
-  const $targetLi = e.target.closest('.todo-list-item');
-
-  if (e.target.classList.contains('.modify span')) {
-    const $textSpan = $targetLi.querySelector('.text');
-    const newText = prompt('수정:', $textSpan.textContent);
-    if (newText !== null) {
-      $textSpan.textContent = newText;
-      const id = +$targetLi.dataset.id;
-      const index = todos.findIndex(todo => todo.id === id);
-      if (index !== -1) {
-        todos[index].text = newText;
-      }
-    }
-  }
-});
-
-// checkbox 이벤트 => change 
 
 // 3-1. 할 일 목록의 수정 버튼에 이벤트 리스너 추가
