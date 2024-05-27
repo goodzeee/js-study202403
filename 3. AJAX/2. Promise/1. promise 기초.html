@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <button id="show">Promise요청 !</button>
+
+  <script>
+    
+    // HTTP 비동기 요청을 위한 함수
+    // 비동기 호출의 순서를 보장하기 위해 callback 대신 promise 사용 !
+      function get(url) {
+        // promise는 JS 비동기 통신(AJAX)의 순서를 보장하고
+        // 데이터 처리를 용이하게 하기 위한 API입니다.
+
+        // resolve : 요청에 성공했을 때 실행할 함수
+        // reject : 요청에 실패했을 때 실행할 함수
+        const promise = new Promise((resolve, reject) => {
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.send();
+
+        xhr.onload = e => {
+         if (xhr.status === 200) {
+          const response = JSON.parse(xhr.response);
+          resolve(response);
+        } else {
+          reject(`error!!`);
+        }
+     };
+  });
+     return promise;
+
+
+}
+
+    document.getElementById('show').addEventListener('click', e => {
+      // 버튼을 클릭하면 1. 특정회원을 조회하여
+      // 해당 회원이 쓴 2. 글의 목록을 조회한 후
+      // 해당 글의 3. 댓글들을 조회한다.
+      const url = 'https://jsonplaceholder.typicode.com';
+
+      // 💖 promiseState
+      // 1. pending : 요청대기 중
+      // 2. fulfilled : 요청성공 -> resolve() 실행
+      // 3. rejected : 요청실패 -> reject() 실행
+      const result = get(`${url}/users`)
+      result.then(res => {
+        console.log(res);
+        const userId = res[1].id;
+        const result2 = get(`${url}/users/${userId}/posts`);
+        console.log(result2);
+        return result2;
+      })
+      .then(res => {
+        console.log(res);
+        const postId = res[2].id;
+        const result3 = get(`${url}/posts/${postId}/comments`);
+        console.log(result3);
+        return result3;
+      })
+      .then(res => {
+        console.log(res);
+      });
+
+      //💖 위 코드 정리하면 아래와 같음.
+      // get(`${url}/users`)
+      //   .then(res => get(`${url}/users/${res[1].id}/posts`))
+      //   .then(res => get(`${url}/posts/${res[2].id}/comments`))
+      //   .then(res => console.log(res))
+
+
+
+      // 비동기는 순서대로 진행되지 않기 때문에 순서를 부여해야 하면 -> callback 이 처리 !
+      // get(`${url}/users`, (response) => {  // 1. 회원목록
+      //   const userId = response[1].id;   // 2. 특정회원 id 받아오기
+      //   get(`${url}/users/${userId}/posts`, (response) => {
+      //     const postId = response[2].id;
+      //      get(`${url}/posts/${postId}/comments`, (response) => {
+      //       console.log(response);
+      //      });  // 해당 글의 댓글 목록요청
+      //   }); // 해당 회원이 쓴 글 목록요청
+      // });  // 회원정보 조회
+
+    });
+  </script>
+
+</body>
+</html>

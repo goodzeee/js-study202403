@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <button id="show">서버요청 !</button>
+
+  <script>
+    
+      function get(url, callback) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.send();
+
+      xhr.onload = e => {
+        const response = JSON.parse(xhr.response);
+        callback(response);
+      };
+    }
+
+    document.getElementById('show').addEventListener('click', e => {
+      // 버튼을 클릭하면 1. 특정회원을 조회하여
+      // 해당 회원이 쓴 2. 글의 목록을 조회한 후
+      // 해당 글의 3. 댓글들을 조회한다.
+      const url = 'https://jsonplaceholder.typicode.com';
+
+      // 비동기는 순서대로 진행되지 않기 때문에 순서를 부여해야 하면 -> callback 이 처리 !
+      get(`${url}/users`, (response) => {  // 1. 회원목록
+        const userId = response[1].id;   // 2. 특정회원 id 받아오기
+        get(`${url}/users/${userId}/posts`, (response) => {
+          const postId = response[2].id;
+           get(`${url}/posts/${postId}/comments`, (response) => {
+            console.log(response);
+           });  // 해당 글의 댓글 목록요청
+        }); // 해당 회원이 쓴 글 목록요청
+      });  // 회원정보 조회
+
+    });
+  </script>
+
+</body>
+</html>
