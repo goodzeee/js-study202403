@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <div>
+    댓글내용 : <input type = "text" id = "reply-text">
+  </div>
+  <div>
+    작성자 : <input type = "text" id = "reply-writer">
+  </div>
+  <div>
+    <button id = "register">등록</button>
+  </div>
+
+  <p id = "reply"></p>
+
+  <script>
+    
+    document.getElementById('register').onclick = e => {
+      const requestInfo = {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          text: document.getElementById('reply-text').value,
+          author: document.getElementById('reply-writer').value,
+          bno: 101
+        })
+      };
+      fetch('http://localhost:8383/api/v1/replies', requestInfo)  // get 방식이 아니면 post 요청 객체 보내야 함 !!
+      .then(res => res.json())
+      .then(json => {
+        document.getElementById('reply').innerHTML = `
+        ${json[0].writer} 
+        `;
+      });
+    };
+
+
+  </script>
+
+</body>
+</html>

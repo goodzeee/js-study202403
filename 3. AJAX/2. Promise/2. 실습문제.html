@@ -183,16 +183,16 @@
         
         let tag = '';
 
-        movies.forEach(({large_cover_image, title, rating, year}) => {
+        movies.forEach(({id, large_cover_image, title, rating, year}) => {
           tag += `
-          <div class="movie">
+          <div class="movie" data-movie-id="${id}" data-bs-toggle="modal" data-bs-target="#detailModal">
             <div class="img-box">
                 <img src="${large_cover_image}" alt="표지사진">
             </div>
             <div class="inner">
                 <div class="title">${title}</div>
-                <div class="year">${year}</div>
-                <div class="rating">${rating}</div>
+                <div class="year">${year}년</div>
+                <div class="rating">${rating}점</div>
             </div>
           </div>
           `;
@@ -233,6 +233,32 @@
             break;
         }
       });
+
+      function makeMovieDetailDOM({title, large_cover_image, description_full}) {
+        const $modalTitle = document.querySelector('.modal-title');
+        const $descImg = document.querySelector('.desc-image');
+        const $summary = document.querySelector('.movie-description');
+
+        $modalTitle.textContent = title;
+        $descImg.src = large_cover_image;
+        $summary.textContent = description_full;
+      }
+
+      const $movie = document.querySelector('.movie-list');
+
+      $movie.addEventListener('click', e => {
+        if(!e.target.matches('.movie-list .movie *')) return;
+
+        const movieId = e.target.closest('.movie').dataset.movieId;
+        fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${movieId}`)
+        .then(res => res.json())
+        .then(json => {
+            makeMovieDetailDOM(json.data.movie);
+        });
+
+      });
+      
+
     </script>
 
     </body>
