@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <button id = "remove">댓글 삭제</button>
+
+  <script>
+    document.getElementById('remove').onclick = e => {
+
+      const rno = 5004;
+      fetch(`http://localhost:8383/api/v1/replies/${rno}`, {
+        method : 'DELETE',  // -> 매핑 방식 적어주기 !
+        // header, body -> 삭제 처리라 따로 데이터 보내야 할 거 없으니 생략 가능
+      })
+      .then(res => res.json())
+      .then(json => {
+        console.log(json);
+      })
+    };
+  </script>
+
+</body>
+</html>
