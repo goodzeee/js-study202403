@@ -1,19 +1,21 @@
+import Component from "./Component.js";
 
 
-// 1개의 li태그
+// LI 태그 렌더링 담당
+class ProductItem extends Component{
 
-class productItem {
-
-  constructor(prod) {
+  constructor(tagId, prod) {
+    super(tagId);
     this.prod = prod;
   }
 
   render() {
+
     const { title, price, image, desc } = this.prod;
 
-    const $prodLi = document.createElement('li');
-      $prodLi.classList.add('product-item');
-      $prodLi.innerHTML = `
+    // const $prodLi = document.createElement('li');
+    // $prodLi.classList.add('product-item');
+    const childHtml = `
       <div>
         <img src="${image}" alt="${title}">
         <div class="product-item__content">
@@ -25,8 +27,17 @@ class productItem {
       </div>
     `;
 
+    const $prodLi = this.createElement('li', 'product-item', childHtml);
+
+
+    const $btn = $prodLi.querySelector('button');
+    $btn.addEventListener('click', e => {
+      console.log(title);
+      console.log('버튼 크릭!!');
+    });
+
     return $prodLi;
   }
 }
 
-export default productItem;
+export default ProductItem;

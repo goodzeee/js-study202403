@@ -23,6 +23,11 @@ header {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.26);
 }
 
+#app {
+  width: 50%;
+  margin: 0 auto;
+}
+
 header h1 {
   color: white;
   font-size: 2rem;
